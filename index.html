@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>凌乐心与栗子球的秘密花园</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+    <audio id="bgm" src="music/bgm.mp3" loop></audio>
+    <div class="music-bar">
+        <button id="music-btn" class="music-btn" title="播放/暂停音乐">🎵</button>
+        <span id="music-title" class="music-title">愛は花・君はその種子</span>
+    </div>
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="nav-title">凌乐心与栗子球的秘密花园</a>
+            <div class="nav-links">
+                <a href="about.html">关于我们</a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="home-container">
+        <div class="photowall-intro">
+            愛は花・君はその種子
+        </div>
+        <div class="photowall-grid">
+            <div class="frame frame-lg"><img src="images/photo1.jpg" alt="照片1"></div>
+            <div class="frame frame-md"><img src="images/photo2.jpg" alt="照片2"></div>
+            <div class="frame frame-sm"><img src="images/photo3.jpg" alt="照片3"></div>
+            <div class="frame frame-md"><img src="images/photo4.jpg" alt="照片4"></div>
+            <div class="frame frame-lg"><img src="images/photo5.jpg" alt="照片5"></div>
+            <div class="frame frame-sm"><img src="images/photo6.jpg" alt="照片6"></div>
+            <div class="frame frame-md"><img src="images/photo7.jpg" alt="照片7"></div>
+            <div class="frame frame-sm"><img src="images/photo8.jpg" alt="照片8"></div>
+            <div class="frame frame-md"><img src="images/photo9.jpg" alt="照片9"></div>
+            <div class="frame frame-sm"><img src="images/photo10.jpg" alt="照片10"></div>
+            <!-- 你可以继续添加更多照片，或留空frame做装饰 -->
+        </div>
+    </div>
+    <script>
+        const musicBtn = document.getElementById('music-btn');
+        const bgm = document.getElementById('bgm');
+        let playing = false;
+        musicBtn.addEventListener('click', function () {
+            if (bgm.paused) {
+                bgm.play();
+                playing = true;
+                musicBtn.textContent = '⏸️';
+            } else {
+                bgm.pause();
+                playing = false;
+                musicBtn.textContent = '🎵';
+            }
+        });
+    </script>
+</body>
+
+</html>

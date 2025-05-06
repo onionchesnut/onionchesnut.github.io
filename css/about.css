@@ -1,0 +1,158 @@
+body {
+    background: #fdf3f3;
+}
+
+.home-container {
+    margin-top: 10px;
+}
+
+.home-title {
+    margin-bottom: 0.2em;
+    text-align: center;
+    font-size: 3em;
+    color: #7a5c4d;
+    font-family: 'Georgia', serif;
+    font-weight: bold;
+}
+
+.about-intro {
+    text-align: center;
+    font-size: 1.2em;
+    color: #b07a7a;
+    margin-bottom: 1.2em;
+    margin-top: 0.5em;
+    font-family: 'Georgia', serif;
+    letter-spacing: 1px;
+}
+
+.story-cards {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    /* 减少了卡片之间的垂直间距 */
+    max-width: 800px;
+    margin: 0 auto 2em auto;
+}
+
+.story-card {
+    display: flex;
+    align-items: flex-start;
+    margin: 12px 0;
+    /* 减少了卡片的外边距 */
+}
+
+.story-card.girl {
+    flex-direction: row;
+}
+
+.story-card.boy {
+    flex-direction: row-reverse;
+}
+
+.story-card .avatar {
+    width: 50px;
+    height: 50px;
+    margin: 0 10px;
+}
+
+.story-card .avatar-img {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.story-card .bubble {
+    max-width: 70%;
+    padding: 15px;
+    border-radius: 15px;
+    position: relative;
+    margin: 8px 0;
+    /* 减少了气泡的上下外边距 */
+}
+
+.story-card.girl .bubble {
+    background-color: #FFE4E1;
+    /* 浅粉色 */
+}
+
+.story-card.boy .bubble {
+    background-color: #E6E6FA;
+    /* 浅紫色 */
+}
+
+.story-card .story-title-row {
+    display: flex;
+    align-items: center;
+    gap: 0.4em;
+    margin-bottom: 0.2em;
+}
+
+.story-card .story-title-row h4 {
+    margin: 0 0 0 0;
+    font-size: 1.08em;
+    color: #e6a4b4;
+    font-weight: bold;
+    display: inline;
+}
+
+.story-card.boy .story-title-row h4 {
+    color: #6fa8dc;
+}
+
+.story-card p {
+    margin: 0;
+    color: #7a5c4d;
+    font-size: 1em;
+    text-align: left;
+    line-height: 1.7;
+    width: 100%;
+    padding-top: 0.2em;
+    white-space: pre-line;
+}
+
+.story-card .story-num {
+    position: absolute;
+    top: -10px;
+    left: 10px;
+    background-color: #fff;
+    padding: 2px 8px;
+    border-radius: 10px;
+    font-size: 12px;
+    color: #666;
+}
+
+@media (max-width: 900px) {
+    .story-cards {
+        max-width: 98vw;
+        gap: 16px;
+        /* 移动端减少了卡片间距 */
+    }
+
+    .story-card .bubble {
+        min-width: 0;
+        width: 100%;
+        max-width: 98vw;
+        padding: 1em 1em 1em 1em;
+    }
+}
+
+@media (max-width: 600px) {
+    .story-card .avatar {
+        width: 36px;
+        height: 36px;
+        font-size: 1.3em;
+        margin: 0 6px;
+    }
+
+    .story-card .bubble {
+        padding: 0.8em 0.6em 0.8em 0.6em;
+        margin: 6px 0;
+        /* 移动端进一步减少气泡外边距 */
+    }
+
+    .story-cards {
+        gap: 14px;
+        /* 小屏幕设备上进一步减少卡片间距 */
+    }
+}

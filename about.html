@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>关于我们 - 我们的故事</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/about.css">
+</head>
+
+<body>
+    <div class="home-container">
+        <div class="home-title">关于我们</div>
+        <div class="story-cards" id="story-cards">
+            <!-- 故事卡片将通过 JavaScript 动态生成 -->
+        </div>
+        <button class="show-more-btn" id="show-more-btn">查看更多</button>
+        <a class="button" href="index.html">返回首页</a>
+    </div>
+    <script type="module">
+        import stories from './js/stories.js';
+
+        const storyCardsContainer = document.getElementById('story-cards');
+        const btn = document.getElementById('show-more-btn');
+        const VISIBLE_CARDS = 12; // 初始显示的故事数量
+
+        // 创建故事卡片
+        function createStoryCard(story) {
+            const isGirl = story.id % 2 === 1;
+            return `
+            <div class="story-card ${isGirl ? 'girl' : 'boy'} ${story.id > VISIBLE_CARDS ? 'hidden-story' : ''}">
+                ${isGirl ? `
+                    <div class="avatar"><img src="images/girl-avatar.png" alt="女生头像" class="avatar-img"></div>
+                    <div class="bubble girl-bubble">
+                        <span class="story-num">${story.id} ${story.emoji}</span>
+                        <p>${story.content}</p>
+                    </div>
+                ` : `
+                    <div class="avatar"><img src="images/boy-avatar.png" alt="男生头像" class="avatar-img"></div>
+                    <div class="bubble boy-bubble">
+                        <span class="story-num">${story.id} ${story.emoji}</span>
+                        <p>${story.content}</p>
+                    </div>
+                `}
+            </div>
+        `;
+        }
+
+        // 渲染故事卡片
+        function renderStories() {
+            storyCardsContainer.innerHTML = stories.map(createStoryCard).join('');
+        }
+
+        // 处理"查看更多"按钮点击
+        let expanded = false;
+        btn.onclick = function () {
+            const hiddenStories = document.querySelectorAll('.story-card.hidden-story');
+            if (!expanded) {
+                hiddenStories.forEach(card => card.style.display = 'flex');
+                btn.textContent = '收起';
+                expanded = true;
+            } else {
+                hiddenStories.forEach(card => card.style.display = 'none');
+                btn.textContent = '查看更多';
+                expanded = false;
+                window.scrollTo({ top: btn.offsetTop - 200, behavior: 'smooth' });
+            }
+        };
+
+        // 初始化
+        renderStories();
+        document.querySelectorAll('.story-card.hidden-story').forEach(card => card.style.display = 'none');
+    </script>
+</body>
+
+</html>
