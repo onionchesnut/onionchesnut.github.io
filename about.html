@@ -4,12 +4,26 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>关于我们 - 我们的故事</title>
-    <link rel="stylesheet" href="css/style.css">
-    <link rel="stylesheet" href="css/about.css">
+    <title>关于我们 - The Grace</title>
+    <link rel="stylesheet" href="css/style.css?v=14">
+    <link rel="stylesheet" href="css/about.css?v=14">
 </head>
 
 <body>
+    <audio id="bgm" src="music/bgm.mp3" loop></audio>
+    <div class="music-bar">
+        <button id="music-btn" class="music-btn" title="播放/暂停音乐">🎵</button>
+    </div>
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="nav-title">The Grace</a>
+            <div class="nav-links">
+                <a href="about.html">关于我们</a>
+            </div>
+        </div>
+    </nav>
+
+
     <div class="home-container">
         <div class="home-title">关于我们</div>
         <div class="story-cards" id="story-cards">
@@ -67,6 +81,22 @@
                 window.scrollTo({ top: btn.offsetTop - 200, behavior: 'smooth' });
             }
         };
+
+        // 音乐控制
+        const musicBtn = document.getElementById('music-btn');
+        const bgm = document.getElementById('bgm');
+        let playing = false;
+        musicBtn.addEventListener('click', function () {
+            if (bgm.paused) {
+                bgm.play();
+                playing = true;
+                musicBtn.textContent = '⏸️';
+            } else {
+                bgm.pause();
+                playing = false;
+                musicBtn.textContent = '🎵';
+            }
+        });
 
         // 初始化
         renderStories();

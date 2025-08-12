@@ -211,6 +211,7 @@ body {
     color: var(--primary-color);
 }
 
+/* 照片墙网格容器的增强样式 */
 .photowall-grid {
     display: grid;
     grid-template-columns: repeat(6, 1fr);
@@ -218,18 +219,44 @@ body {
     gap: 18px;
     justify-items: center;
     margin-bottom: 2em;
+    padding: 20px;
+    background: rgba(255, 255, 255, 0.3);
+    border-radius: 15px;
+    backdrop-filter: blur(10px);
+    position: relative;
+}
+
+.photowall-grid::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grain" width="100" height="100" patternUnits="userSpaceOnUse"><circle cx="50" cy="50" r="1" fill="rgba(255,255,255,0.1)"/></pattern></defs><rect width="100" height="100" fill="url(%23grain)"/></svg>');
+    pointer-events: none;
+    opacity: 0.3;
+    border-radius: 15px;
 }
 
 .frame {
     background: #fff;
     border: 4px solid #222;
     border-radius: 8px;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15), 0 2px 8px rgba(0, 0, 0, 0.1);
     display: flex;
     align-items: center;
     justify-content: center;
     overflow: hidden;
     position: relative;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    transform: rotate(var(--rotation, 0deg));
+}
+
+.frame:hover {
+    transform: scale(1.05) rotate(var(--rotation, 0deg));
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2), 0 4px 12px rgba(0, 0, 0, 0.15);
+    z-index: 10;
 }
 
 .frame img {
@@ -237,6 +264,104 @@ body {
     height: 100%;
     object-fit: cover;
     display: block;
+}
+
+/* 照片占位符样式 */
+.photo-placeholder {
+    position: relative;
+    border: 4px solid #8b4513;
+    overflow: hidden;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15), 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.photo-placeholder::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(255, 255, 255, 0.1);
+    pointer-events: none;
+    z-index: 1;
+}
+
+.photo-content {
+    font-size: 2em;
+    color: #fff;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+    z-index: 2;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+}
+
+/* 为不同照片添加不同的渐变背景和旋转角度 */
+.photo-1 {
+    background: linear-gradient(135deg, #ff6b6b, #ffa07a);
+    --rotation: -2deg;
+}
+
+.photo-2 {
+    background: linear-gradient(135deg, #ffb6c1, #ffc0cb);
+    --rotation: 1deg;
+}
+
+.photo-3 {
+    background: linear-gradient(135deg, #dda0dd, #e6e6fa);
+    --rotation: -1deg;
+}
+
+.photo-4 {
+    background: linear-gradient(135deg, #98fb98, #90ee90);
+    --rotation: 2deg;
+}
+
+.photo-5 {
+    background: linear-gradient(135deg, #87ceeb, #b0e0e6);
+    --rotation: -1.5deg;
+}
+
+.photo-6 {
+    background: linear-gradient(135deg, #f0e68c, #fffacd);
+    --rotation: 1.5deg;
+}
+
+.photo-7 {
+    background: linear-gradient(135deg, #ffa500, #ffd700);
+    --rotation: -0.5deg;
+}
+
+.photo-8 {
+    background: linear-gradient(135deg, #20b2aa, #48d1cc);
+    --rotation: 0.5deg;
+}
+
+.photo-9 {
+    background: linear-gradient(135deg, #da70d6, #dda0dd);
+    --rotation: -1deg;
+}
+
+.photo-10 {
+    background: linear-gradient(135deg, #ff6347, #ff7f50);
+    --rotation: 1deg;
+}
+
+@keyframes gradientShift {
+    0% {
+        background-position: 0% 50%;
+    }
+
+    50% {
+        background-position: 100% 50%;
+    }
+
+    100% {
+        background-position: 0% 50%;
+    }
 }
 
 .frame-lg {
@@ -271,100 +396,353 @@ body {
 }
 
 .music-bar {
-    position: fixed;
-    top: 0;
-    right: 0;
-    z-index: 1200;
-    display: flex;
-    align-items: center;
-    background: var(--navbar-bg);
-    border-radius: 16px;
-    box-shadow: 0 2px 8px rgba(230, 164, 180, 0.08);
-    padding: 0 10px 0 4px;
-    height: 56px;
+    position: fixed !important;
+    top: 20px !important;
+    right: 20px !important;
+    z-index: 1200 !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    background: var(--navbar-bg) !important;
+    border-radius: 50% !important;
+    box-shadow: 0 3px 10px rgba(230, 164, 180, 0.2) !important;
+    padding: 8px !important;
+    width: 36px !important;
+    height: 36px !important;
+    transition: all 0.3s ease !important;
+    backdrop-filter: blur(10px) !important;
+    border: 1px solid rgba(230, 164, 180, 0.1) !important;
+}
+
+.music-bar:hover {
+    transform: scale(1.1) !important;
+    box-shadow: 0 4px 15px rgba(230, 164, 180, 0.3) !important;
+    background: rgba(251, 234, 236, 0.95) !important;
 }
 
 .music-btn {
-    position: static;
-    background: transparent;
-    border: 1.2px solid var(--primary-color);
-    color: var(--primary-color);
-    border-radius: 50%;
-    width: 24px;
-    height: 24px;
-    font-size: 1em;
-    cursor: pointer;
-    box-shadow: none;
-    transition: background 0.2s, color 0.2s, border 0.2s;
-    outline: none;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-right: 6px;
+    background: transparent !important;
+    border: none !important;
+    color: var(--primary-color) !important;
+    font-size: 1.1em !important;
+    cursor: pointer !important;
+    transition: all 0.3s ease !important;
+    outline: none !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    width: 100% !important;
+    height: 100% !important;
+    border-radius: 50% !important;
 }
 
 .music-btn:hover {
-    background: var(--primary-color);
-    color: #fff;
-    border: 1.2px solid var(--primary-color);
+    color: var(--secondary-color) !important;
+    transform: scale(1.1) !important;
 }
 
-.music-title {
-    font-size: 0.95em;
-    color: var(--navbar-title);
-    font-family: 'Georgia', serif;
-    letter-spacing: 1px;
-    white-space: nowrap;
-    max-width: 90px;
-    overflow: hidden;
-    text-overflow: ellipsis;
+.music-btn:active {
+    transform: scale(0.95) !important;
 }
 
+/* 移动端适配优化 */
 @media (max-width: 900px) {
     .music-bar {
-        height: 48px;
-        padding: 0 6px 0 2px;
-    }
-}
-
-@media (max-width: 600px) {
-    .music-bar {
-        height: 40px;
-        padding: 0 3px 0 1px;
+        width: 32px !important;
+        height: 32px !important;
+        padding: 6px !important;
+        top: 15px !important;
+        right: 15px !important;
     }
 
     .music-btn {
-        width: 18px;
-        height: 18px;
-        font-size: 0.85em;
-        margin-right: 4px;
-    }
-
-    .music-title {
-        font-size: 0.85em;
-        max-width: 60px;
+        font-size: 1em !important;
     }
 }
 
 @media (max-width: 768px) {
+    .navbar {
+        padding: 0.8em 0;
+    }
+
     .nav-container {
         flex-direction: column;
-        gap: 1em;
+        gap: 0.8em;
+        padding: 0 15px;
+    }
+
+    .nav-title {
+        font-size: 1.3em;
+        text-align: center;
+        line-height: 1.3;
     }
 
     .nav-links {
         gap: 1.5em;
     }
 
+    .nav-links a {
+        font-size: 1em;
+    }
+
     .home-container {
-        padding-top: 160px;
+        padding-top: 140px;
+        padding-left: 12px;
+        padding-right: 12px;
     }
 
-    .home-title {
-        font-size: 2.4em;
+    .photowall-grid {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 12px;
+        justify-content: center;
+        align-items: flex-start;
+        padding: 20px;
+        background: rgba(255, 255, 255, 0.3);
+        border-radius: 15px;
+        backdrop-filter: blur(10px);
     }
 
-    .section {
-        padding: 2em 1.5em;
+    .frame {
+        flex-shrink: 0;
+        margin: 5px;
+        transform: rotate(var(--rotation, 0deg));
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .frame:hover {
+        transform: scale(1.05) rotate(var(--rotation, 0deg));
+        box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+        z-index: 10;
+    }
+
+    .frame-lg {
+        width: 120px;
+        height: 140px;
+        --rotation: -2deg;
+    }
+
+    .frame-md {
+        width: 100px;
+        height: 70px;
+        --rotation: 1deg;
+    }
+
+    .frame-sm {
+        width: 60px;
+        height: 60px;
+        --rotation: -1deg;
+    }
+
+    .photo-content {
+        font-size: 1.4em;
+    }
+
+    .frame {
+        border-width: 3px;
+    }
+
+    .music-bar {
+        width: 30px !important;
+        height: 30px !important;
+        padding: 5px !important;
+        top: 12px !important;
+        right: 12px !important;
+    }
+
+    .music-btn {
+        font-size: 0.9em !important;
+    }
+}
+
+@media (max-width: 600px) {
+    .nav-title {
+        font-size: 1.1em;
+        letter-spacing: 1px;
+    }
+
+    .nav-links {
+        gap: 1.2em;
+    }
+
+    .nav-links a {
+        font-size: 0.95em;
+    }
+
+    .home-container {
+        padding-top: 130px;
+        padding-left: 10px;
+        padding-right: 10px;
+    }
+
+    .photowall-grid {
+        gap: 10px;
+        padding: 15px;
+    }
+
+    .frame-lg {
+        width: 100px;
+        height: 120px;
+        --rotation: -1.5deg;
+    }
+
+    .frame-md {
+        width: 80px;
+        height: 60px;
+        --rotation: 1.5deg;
+    }
+
+    .frame-sm {
+        width: 50px;
+        height: 50px;
+        --rotation: -0.5deg;
+    }
+
+    .photo-content {
+        font-size: 1.2em;
+    }
+
+    .frame {
+        border-width: 2px;
+    }
+
+    .music-bar {
+        width: 28px !important;
+        height: 28px !important;
+        padding: 4px !important;
+        top: 10px !important;
+        right: 10px !important;
+    }
+
+    .music-btn {
+        font-size: 0.8em !important;
+    }
+}
+
+@media (max-width: 480px) {
+    .navbar {
+        padding: 0.6em 0;
+    }
+
+    .nav-container {
+        gap: 0.6em;
+        padding: 0 10px;
+    }
+
+    .nav-title {
+        font-size: 1em;
+        letter-spacing: 0.5px;
+    }
+
+    .nav-links {
+        gap: 1em;
+    }
+
+    .nav-links a {
+        font-size: 0.9em;
+    }
+
+    .home-container {
+        padding-top: 120px;
+        padding-left: 8px;
+        padding-right: 8px;
+    }
+
+    .photowall-grid {
+        gap: 8px;
+        padding: 12px;
+    }
+
+    .frame-lg {
+        width: 80px;
+        height: 100px;
+        --rotation: 1deg;
+    }
+
+    .frame-md {
+        width: 70px;
+        height: 50px;
+        --rotation: -1deg;
+    }
+
+    .frame-sm {
+        width: 40px;
+        height: 40px;
+        --rotation: 0.5deg;
+    }
+
+    .photo-content {
+        font-size: 1em;
+    }
+
+    .frame {
+        border-width: 2px;
+        border-radius: 6px;
+    }
+
+    .music-bar {
+        width: 26px !important;
+        height: 26px !important;
+        padding: 3px !important;
+        top: 8px !important;
+        right: 8px !important;
+    }
+
+    .music-btn {
+        font-size: 0.75em !important;
+    }
+}
+
+@media (max-width: 360px) {
+    .nav-title {
+        font-size: 0.9em;
+    }
+
+    .nav-links a {
+        font-size: 0.85em;
+    }
+
+    .photowall-grid {
+        gap: 6px;
+        padding: 10px;
+    }
+
+    .frame-lg {
+        width: 70px;
+        height: 90px;
+        --rotation: -0.5deg;
+    }
+
+    .frame-md {
+        width: 60px;
+        height: 45px;
+        --rotation: 0.5deg;
+    }
+
+    .frame-sm {
+        width: 35px;
+        height: 35px;
+        --rotation: -0.5deg;
+    }
+
+    .photo-content {
+        font-size: 0.9em;
+    }
+
+    .frame {
+        border-width: 1px;
+        border-radius: 4px;
+    }
+
+    .music-bar {
+        width: 24px !important;
+        height: 24px !important;
+        padding: 2px !important;
+        top: 6px !important;
+        right: 6px !important;
+    }
+
+    .music-btn {
+        font-size: 0.7em !important;
     }
 }
